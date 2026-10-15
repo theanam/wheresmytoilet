@@ -52,6 +52,13 @@ export const config = {
     heartbeatAt: 90, // %
   },
 
+  touch: {
+    lookSensitivity: 0.006, // radians per pixel dragged
+    stickRadius: 55, // pixels the joystick knob can travel
+    stickDeadZone: 0.2, // fraction of the radius ignored, so resting thumbs don't walk
+    stickZoneWidth: 0.45, // left fraction of the screen that starts the joystick
+  },
+
   audio: {
     volume: 0.8, // master volume, 0–1
     stepInterval: 0.5, // seconds between footsteps when walking

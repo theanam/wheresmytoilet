@@ -15,6 +15,21 @@ describe('help and about pages', () => {
   });
 });
 
+describe('mobile', () => {
+  it('index.html fits the phone screen without zooming', () => {
+    const html = read('index.html');
+    expect(html).toMatch(/name="viewport" content="[^"]*width=device-width/);
+    expect(html).toMatch(/name="viewport" content="[^"]*user-scalable=no/);
+    expect(html).toMatch(/name="viewport" content="[^"]*viewport-fit=cover/);
+  });
+
+  it('help explains the touch controls', () => {
+    const html = read('help.html');
+    expect(html).toContain('On a phone or tablet');
+    expect(html).toContain('USE');
+  });
+});
+
 describe('build config', () => {
   it('uses relative asset paths so it works on GitHub Pages', () => {
     expect(viteConfig.base).toBe('./');

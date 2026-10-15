@@ -67,6 +67,27 @@ describe('first-person camera (default)', () => {
   });
 });
 
+describe('touch look and screen shape', () => {
+  it('turns with a touch drag and limits looking up and down', () => {
+    setup();
+    const yaw = round.player.yaw;
+    round.player.look(100, 0);
+    expect(round.player.yaw).toBeCloseTo(yaw + 100 * config.touch.lookSensitivity);
+    round.player.look(0, 100000);
+    expect(round.player.camera.rotation.x).toBeCloseTo(1.4);
+    round.player.look(0, -100000);
+    expect(round.player.camera.rotation.x).toBeCloseTo(-1.4);
+  });
+
+  it('widens the view in portrait so phones held upright still see the corridor', () => {
+    setup();
+    round.player.fitAspect(390 / 844);
+    expect(round.player.camera.fovMode).toBe(1); // horizontal fixed
+    round.player.fitAspect(844 / 390);
+    expect(round.player.camera.fovMode).toBe(0); // vertical fixed
+  });
+});
+
 describe('third-person camera', () => {
   it('shows a visible character and keeps the camera behind and above it', () => {
     setup(1234, 'third');

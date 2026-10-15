@@ -13,6 +13,15 @@ const CONTROLS: [string, string][] = [
   ['Esc', 'Pause'],
 ];
 
+const TOUCH_CONTROLS: [string, string][] = [
+  ['Left thumb', 'Drag to walk'],
+  ['Right thumb', 'Drag to look around'],
+  ['RUN', 'Sprint on / off — urgency rises 2×'],
+  ['HOLD', 'Clench — stand still, urgency pauses'],
+  ['USE', 'Use a toilet door'],
+  ['🔊', 'Sound on / off'],
+];
+
 function screen(className: string, ...children: (Node | string)[]): HTMLElement {
   return h('div', { class: `screen ${className}` }, h('div', { class: 'panel' }, ...children));
 }
@@ -32,16 +41,18 @@ function footerLinks(newTab: boolean): HTMLElement {
   );
 }
 
-export function titleScreen(onPlay: () => void): HTMLElement {
+export function titleScreen(onPlay: () => void, touch = false): HTMLElement {
+  const controls = touch ? TOUCH_CONTROLS : CONTROLS;
   return screen(
     'title',
     h('h1', {}, "Where's My Toilet?"),
     h('p', { class: 'tagline' }, 'You need to go. Badly. Find the toilet before your Urgency hits 100%.'),
     button('Play', onPlay, true),
+    touch ? h('p', { class: 'hint' }, 'Tip: turn your phone sideways for the best view.') : '',
     h(
       'table',
       { class: 'controls' },
-      ...CONTROLS.map(([key, action]) => h('tr', {}, h('td', {}, h('kbd', {}, key)), h('td', {}, action))),
+      ...controls.map(([key, action]) => h('tr', {}, h('td', {}, h('kbd', {}, key)), h('td', {}, action))),
     ),
     footerLinks(false),
   );

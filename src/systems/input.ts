@@ -2,6 +2,7 @@
 export class InputState {
   private held = new Set<string>();
   private pressed = new Set<string>();
+  private stick = { forward: 0, strafe: 0 };
 
   keyDown(code: string): void {
     if (!this.held.has(code)) this.pressed.add(code);
@@ -16,6 +17,12 @@ export class InputState {
   clear(): void {
     this.held.clear();
     this.pressed.clear();
+    this.stick = { forward: 0, strafe: 0 };
+  }
+
+  /** Movement from the on-screen joystick, each axis in [-1, 1]. Keys take priority. */
+  setStick(forward: number, strafe: number): void {
+    this.stick = { forward, strafe };
   }
 
   isHeld(code: string): boolean {
@@ -35,11 +42,12 @@ export class InputState {
     return this.isHeld('Space');
   }
 
-  /** Movement intent: forward (+1 = W) and strafe (+1 = D), each in [-1, 1]. */
+  /** Movement intent: forward (+1 = W / stick up) and strafe (+1 = D / stick right), each in [-1, 1]. */
   get axes(): { forward: number; strafe: number } {
     const f = (this.isHeld('KeyW') || this.isHeld('ArrowUp') ? 1 : 0) - (this.isHeld('KeyS') || this.isHeld('ArrowDown') ? 1 : 0);
     const s = (this.isHeld('KeyD') || this.isHeld('ArrowRight') ? 1 : 0) - (this.isHeld('KeyA') || this.isHeld('ArrowLeft') ? 1 : 0);
-    return { forward: f, strafe: s };
+    if (f !== 0 || s !== 0) return { forward: f, strafe: s };
+    return { ...this.stick };
   }
 
   attach(target: Window): () => void {

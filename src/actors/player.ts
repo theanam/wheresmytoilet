@@ -1,3 +1,4 @@
+import { Camera } from '@babylonjs/core/Cameras/camera';
 import { FreeCamera } from '@babylonjs/core/Cameras/freeCamera';
 import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial';
 import { Color3 } from '@babylonjs/core/Maths/math.color';
@@ -74,6 +75,30 @@ export class Player {
       this.walkTime += dt * speed;
     }
     this.syncCamera();
+  }
+
+  /** Turn the view by a touch drag of (dx, dy) pixels. */
+  look(dx: number, dy: number): void {
+    const sens = config.touch.lookSensitivity;
+    this.camera.rotation.y += dx * sens;
+    const limit = this.mode === 'first' ? 1.4 : config.camera.maxPitch;
+    const floor = this.mode === 'first' ? -1.4 : config.camera.minPitch;
+    this.camera.rotation.x = Math.max(floor, Math.min(limit, this.camera.rotation.x + dy * sens));
+  }
+
+  /**
+   * Keep a sensible field of view on any screen: in portrait (phones held
+   * upright) fix the horizontal angle so the view isn't a narrow slit.
+   */
+  fitAspect(aspect: number): void {
+    const base = this.mode === 'third' ? config.camera.fov : 1.1;
+    if (aspect < 1) {
+      this.camera.fovMode = Camera.FOVMODE_HORIZONTAL_FIXED;
+      this.camera.fov = 1.35;
+    } else {
+      this.camera.fovMode = Camera.FOVMODE_VERTICAL_FIXED;
+      this.camera.fov = base;
+    }
   }
 
   /** Visual pose for the frame: walking bob, or a squished wiggle while clenching. */
