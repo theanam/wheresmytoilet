@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚽</text></svg>" />
+    <title>Help — Where's My Toilet?</title>
+    <link rel="stylesheet" href="/src/pages.css" />
+  </head>
+  <body>
+    <main class="page">
+      <nav class="top"><a href="./index.html">← Back to the game</a> · <a href="./about.html">About</a></nav>
+      <h1>Help</h1>
+
+      <h2>The goal</h2>
+      <p>You are desperate for a toilet. Somewhere in this maze-like shopping mall there is one that works.
+        Find it and press <kbd>E</kbd> at its blue door before your <strong>Urgency</strong> meter reaches 100%.</p>
+
+      <h2>Controls</h2>
+      <table>
+        <tr><td><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></td><td>Walk (arrow keys work too)</td></tr>
+        <tr><td>Mouse</td><td>Look around. Click the game to lock the pointer.</td></tr>
+        <tr><td><kbd>Shift</kbd> (hold)</td><td>Sprint — faster, but Urgency rises twice as fast</td></tr>
+        <tr><td><kbd>Space</kbd> (hold)</td><td>Clench — stand still; Urgency stops rising while you have Clench stamina</td></tr>
+        <tr><td><kbd>E</kbd></td><td>Use a toilet door</td></tr>
+        <tr><td><kbd>M</kbd></td><td>Sound on / off (remembered for next time)</td></tr>
+        <tr><td><kbd>Esc</kbd></td><td>Pause</td></tr>
+      </table>
+
+      <h2>Urgency and Clench</h2>
+      <ul>
+        <li>Urgency starts at 20% and keeps rising. Sprinting doubles the rate.</li>
+        <li>The food court smells amazing. That's bad: Urgency rises faster while you're in it.</li>
+        <li>Clench stamina drains while you hold <kbd>Space</kbd> and slowly refills when you let go.</li>
+        <li>Listen to your body: footsteps speed up above 75%, your stomach starts rumbling above 50%, and above 90% you'll hear your heartbeat.</li>
+        <li>Above 75% the world starts to wobble. Above 90%… hurry.</li>
+      </ul>
+
+      <h2>Stars</h2>
+      <p>Under 1 minute: ★★★ · Under 2 minutes: ★★☆ · Otherwise: ★☆☆</p>
+
+      <h2>Tips</h2>
+      <ul>
+        <li>Toilets hide at dead ends and along corridor edges, never near the entrance.</li>
+        <li>Use the fountain in the middle and the food court as landmarks.</li>
+        <li>Save Clench for when you're nearly there.</li>
+      </ul>
+
+      <h2>Troubleshooting</h2>
+      <ul>
+        <li><strong>The mouse doesn't turn the camera:</strong> click inside the game. If your browser blocks pointer lock, click and drag instead.</li>
+        <li><strong>It's slow:</strong> close other tabs and make sure hardware acceleration is turned on in your browser settings.</li>
+        <li><strong>No sound:</strong> browsers only allow sound after you click, so it starts when you press Play. Check that it isn't muted (press <kbd>M</kbd>) and that the tab isn't muted.</li>
+        <li><strong>Blank screen:</strong> your browser needs WebGL. Try a recent Chrome, Firefox or Safari.</li>
+      </ul>
+
+      <h2>Still stuck?</h2>
+      <p>Found a bug? Please <a href="https://github.com/theanam/wheresmytoilet/issues">open an issue on GitHub</a>.
+        For anything else, email <a href="mailto:anam.ahmed.a@gmail.com">anam.ahmed.a@gmail.com</a>.</p>
+    </main>
+  </body>
+</html>
